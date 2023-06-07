@@ -1,0 +1,22 @@
+<div class="product-list">
+  <div *ngFor="let product of products" class="product-card">
+    <h2>{{ product.name }}</h2>
+    <p>Price: {{ product.price }}</p>
+    <button (click)="editProduct(product)">Edit</button>
+    <button (click)="deleteProduct(product.id)">Delete</button>
+  </div>
+</div>
+
+<!-- New Product Form -->
+<form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+  <input type="text" name="name" ngModel placeholder="Product Name">
+  <input type="number" name="price" ngModel placeholder="Product Price">
+  <button type="submit">Add New Product</button>
+</form>
+
+<!-- Edit Product Form -->
+<form *ngIf="editingProduct" #editForm="ngForm" (ngSubmit)="onSubmitEdit(editForm)">
+  <input type="text" name="name" [(ngModel)]="editingProduct.name">
+  <input type="number" name="price" [(ngModel)]="editingProduct.price">
+  <button type="submit">Save Changes</button>
+</form>

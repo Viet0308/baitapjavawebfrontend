@@ -1,0 +1,13 @@
+<div class="category-list">
+  <div *ngFor="let category of categories" class="category-card">
+    <h2>{{ category.name }}</h2>
+    <button (click)="editCategory(category)">Edit</button>
+    <button (click)="deleteCategory(category.id)">Delete</button>
+  </div>
+</div>
+
+<!-- New Category Form -->
+<form #categoryForm="ngForm" (ngSubmit)="onSubmit(categoryForm)">
+  <input type="text" name="name" ngModel placeholder="Category Name">
+  <button type="submit">Add New Category</button>
+</form>
