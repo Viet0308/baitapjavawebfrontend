@@ -1,0 +1,12 @@
+<!-- Edit Product Form -->
+<form *ngIf="editingProduct" #editForm="ngForm" (ngSubmit)="onSubmitEdit(editForm)">
+    <input type="text" name="name" [(ngModel)]="editingProduct.name">
+    <input type="number" name="price" [(ngModel)]="editingProduct.price">
+    <input type="text" name="image" [(ngModel)]="editingProduct.image">
+    <button type="submit">Save Changes</button>
+  </form>
+ 
+  
+  <a routerLink="/products">Back to Products</a>
+
+  

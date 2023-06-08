@@ -1,22 +1,45 @@
-<div class="product-list">
-  <div *ngFor="let product of products" class="product-card">
-    <h2>{{ product.name }}</h2>
-    <p>Price: {{ product.price }}</p>
-    <button (click)="editProduct(product)">Edit</button>
-    <button (click)="deleteProduct(product.id)">Delete</button>
+<div class="category-list">
+  <div class="category-card">
+    <h2>Hãng</h2>
+    <ul>
+      <li>Apple</li>
+      <li>Dell</li>
+      <li>HP</li>
+      <!-- Add more brands as needed -->
+    </ul>
   </div>
+  <div class="category-card">
+    <h2>Giá</h2>
+    <ul>
+      <li>Dưới 10 triệu</li>
+      <li>10 - 20 triệu</li>
+      <li>Trên 20 triệu</li>
+      <!-- Add more price ranges as needed -->
+    </ul>
+  </div>
+  <!-- Add more category cards as needed -->
 </div>
 
-<!-- New Product Form -->
-<form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
-  <input type="text" name="name" ngModel placeholder="Product Name">
-  <input type="number" name="price" ngModel placeholder="Product Price">
-  <button type="submit">Add New Product</button>
-</form>
+<button routerLink="/add-product">Thêm mới sản phẩm</button>
+
+
+
+<div class="product-list">
+  <div *ngFor="let product of products" class="product-card">
+    <img [src]="product.image" alt="{{ product.name }}"> 
+    <h3>{{ product.name }}</h3>
+    <p>Price: {{ product.price }}</p>
+    <button [routerLink]="['/edit-product', product.id]">Chỉnh sửa sản phẩm</button> 
+    <button (click)="deleteProduct(product.id)">Xóa sản phẩm</button>
+    <button [routerLink]="['/product-detail', product.id]">Chi tiết sản phẩm</button> 
+  </div>
+</div>
 
 <!-- Edit Product Form -->
 <form *ngIf="editingProduct" #editForm="ngForm" (ngSubmit)="onSubmitEdit(editForm)">
   <input type="text" name="name" [(ngModel)]="editingProduct.name">
   <input type="number" name="price" [(ngModel)]="editingProduct.price">
+  <input type="text" name="image" [(ngModel)]="editingProduct.image"> <!-- Add this line -->
   <button type="submit">Save Changes</button>
 </form>
+

@@ -1,0 +1,12 @@
+<!-- New Product Form -->
+<form #productForm="ngForm" (ngSubmit)="onSubmit(productForm)">
+    <input type="text" name="name" ngModel placeholder="Product Name">
+    <input type="number" name="price" ngModel placeholder="Product Price">
+    <input type="text" name="image" ngModel placeholder="Product Image URL">
+    <button type="submit">Add New Product</button>
+  </form>
+  
+
+  <a routerLink="/products">Back to Products</a>
+
+  

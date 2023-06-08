@@ -1,8 +1,48 @@
-h2 {
-    color: blue;
-  }
-  
-  p {
-    color: green;
-  }
-  
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Change this from space-between to space-around */
+  align-items: center; /* Add this line */
+}
+
+.product-card {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding: 20px;
+  width: calc(33.3333% - 20px);
+  box-sizing: border-box; /* Add this line to include padding and border in the element's total width and height */
+}
+
+.product-card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.product-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.product-card p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+button {
+  margin-right: 10px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+form input {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}

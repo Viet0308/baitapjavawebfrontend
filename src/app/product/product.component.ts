@@ -19,6 +19,8 @@ export class ProductComponent implements OnInit {
     });
   }
 
+  
+
   editProduct(product: Product) {
     this.editingProduct = product;
   }
@@ -27,6 +29,7 @@ export class ProductComponent implements OnInit {
   deleteProduct(id: number) {
     this.productService.deleteProduct(id).subscribe(() => {
       this.products = this.products.filter(product => product.id !== id);
+      alert('Product deleted successfully!'); // Show an alert
     });
   }
 
@@ -34,21 +37,27 @@ export class ProductComponent implements OnInit {
     const newProduct: Product = {
       name: form.value.name,
       price: form.value.price,
-      id: 0
+      id: 0,
+      image: form.value.image
     };
     this.productService.createProduct(newProduct).subscribe(product => {
       this.products.push(product);
+      form.reset(); // Reset the form
+      alert('Product added successfully!'); // Show an alert
     });
   }
 
   onSubmitEdit(form: NgForm) {
     if (this.editingProduct) {
-      this.productService.updateProduct(this.editingProduct.id, this.editingProduct).subscribe(product => {
+      this.editingProduct.image = form.value.image;
+       this.productService.updateProduct(this.editingProduct.id, this.editingProduct).subscribe(product => {
         const index = this.products.findIndex(p => p.id === this.editingProduct?.id);
         if (index !== -1 && product) {
           this.products[index] = product;
         }
         this.editingProduct = null;
+        form.reset(); // Reset the form
+        alert('Product updated successfully!'); // Show an alert
       });
     }
   }
