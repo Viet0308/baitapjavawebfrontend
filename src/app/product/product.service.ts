@@ -21,6 +21,10 @@ export class ProductService {
     return this.http.get<Product>(`${this.apiUrl}/getProdByID/${id}`, { headers });
   }
 
+  addProductToCart(product: Product): Observable<Product> {
+    return this.http.post<Product>(`${this.apiUrl}/addProductToCart`, product);
+  }
+
   createProduct(product: Product): Observable<Product> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('withCredentials', 'true');
     return this.http.post<Product>(`${this.apiUrl}/createProd`, product, { headers });
@@ -35,4 +39,6 @@ export class ProductService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json').set('withCredentials', 'true');
     return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
   }
+
+
 }

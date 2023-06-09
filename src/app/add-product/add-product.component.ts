@@ -20,7 +20,8 @@ export class AddProductComponent implements OnInit {
       name: form.value.name,
       price: form.value.price,
       image: form.value.image,
-      id: 0
+      id: 0,
+      quantity: 0
     };
     this.productService.createProduct(newProduct).subscribe(product => {
       form.reset();

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ProductService } from './product.service';
 import { Product } from './product.model';
+import { CartService } from '../cart/cart.service'; // Thêm dòng này
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -11,7 +13,12 @@ import { Product } from './product.model';
 export class ProductComponent implements OnInit {
   products: Product[] = [];
   editingProduct: Product | null = null; 
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,
+    private router: Router
+
+    ) { }
 
   ngOnInit(): void {
     this.productService.getProducts().subscribe(products => {
@@ -19,12 +26,19 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  
+  addToCart(product: Product) {
+    this.cartService.addProduct(product);
+    this.addToCartSuccess = true;
+    const successMessage = `Thêm sản phẩm ${product.name} vào giỏ hàng thành công`;
+    alert(successMessage);
+  }
 
   editProduct(product: Product) {
     this.editingProduct = product;
   }
   
+  addToCartSuccess = false;
+
 
   deleteProduct(id: number) {
     this.productService.deleteProduct(id).subscribe(() => {
@@ -38,13 +52,19 @@ export class ProductComponent implements OnInit {
       name: form.value.name,
       price: form.value.price,
       id: 0,
-      image: form.value.image
+      image: form.value.image,
+      quantity: 0
     };
     this.productService.createProduct(newProduct).subscribe(product => {
       this.products.push(product);
       form.reset(); // Reset the form
       alert('Product added successfully!'); // Show an alert
     });
+  }
+
+  viewCartItems() {
+    const cartItems = this.cartService.getCartItems();
+    this.router.navigate(['/cart']);
   }
 
   onSubmitEdit(form: NgForm) {

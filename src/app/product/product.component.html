@@ -19,6 +19,8 @@
   </div>
   <!-- Add more category cards as needed -->
 </div>
+<button (click)="viewCartItems()">Xem giỏ hàng của bạn</button>
+
 
 <button routerLink="/add-product">Thêm mới sản phẩm</button>
 
@@ -31,6 +33,7 @@
     <p>Price: {{ product.price }}</p>
     <button [routerLink]="['/edit-product', product.id]">Chỉnh sửa sản phẩm</button> 
     <button (click)="deleteProduct(product.id)">Xóa sản phẩm</button>
+    <button (click)="addToCart(product)">Thêm vào giỏ hàng</button>
     <button [routerLink]="['/product-detail', product.id]">Chi tiết sản phẩm</button> 
   </div>
 </div>

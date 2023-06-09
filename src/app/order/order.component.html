@@ -1,0 +1,7 @@
+<h2>Danh sách đơn hàng</h2>
+
+<div *ngFor="let order of orders">
+  <h3>Đơn hàng ID: {{ order.id }}</h3>
+  <p>Tổng tiền: {{ order.total }}</p>
+  <button [routerLink]="['/order-detail', order.id]">Xem chi tiết</button>
+</div>
